@@ -11,7 +11,7 @@
         if (xhr.readyState === 4) {
           var res = JSON.parse(xhr.responseText);
           var path = "https://psymm.github.io/HWBC-Results/" + res.items[0].path;
-          if (path.contains("latest") == false) {
+          if (path.includes("latest") == false) {
             document.location = path;
           }
       }};
