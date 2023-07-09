@@ -6,6 +6,7 @@
       xhr.open("GET", url);
 
       xhr.setRequestHeader("Accept", "application/vnd.github.v3+json");
+      xhr.setRequestHeader("Authorization", "Bearer: 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");
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
