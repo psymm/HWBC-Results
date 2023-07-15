@@ -14,7 +14,8 @@
   <body>
     <div>
       <ul id="sessions">
-        {% for file in site.static_files | sort: 'modified_time' | reverse | limit: 50 %}
+        {% assign results = site.static_files | sort: 'modified_time' | reverse %}
+        {% for file in results limit: 50 %}
           <li><a href="{{ file.path }}" target="results">{{ file.basename }}</li>
         {% endfor %}
       </ul>
