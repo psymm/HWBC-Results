@@ -16,7 +16,9 @@
       <ul id="sessions">
         {% assign results = site.static_files | sort: 'modified_time' | reverse %}
         {% for file in results limit: 50 %}
-          <li><a href="{{ file.path }}" target="results">{{ file.basename }}</li>
+          {% if file.path contains "Monday" %}
+          <li><a href="{{ file.path | relative_url }}" target="results">{{ file.basename | date: "%d %B %Y" }}</li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
