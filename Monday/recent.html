@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <style>
+      div {
+        font-family: 'Open Sans', sans-serif;
+          font-size: 12pt;
+          font-weight: 400;
+          line-height: 1.56;
+      }      
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul id="sessions">
+        {% for page in site.pages %}
+          <li><a href="{{ page.url | sort: 'date' | reverse | limit: 50 }}" target="results">{{ page.dir }} {{ page.name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <script>
+      var xhr = new XMLHttpRequest();
+      var url = "https://api.github.com/search/code?q=repo:psymm/HWBC-Results+path:Monday+extension:htm&sort=indexed";
+      xhr.open("GET", url);
+
+      xhr.setRequestHeader("Accept", "application/vnd.github.v3+json");
+
+      xhr.onreadystatechange = function () {
+         if (xhr.readyState === 4) {
+           var res = JSON.parse(xhr.responseText);
+           for (var i in res.items) {
+             console.log(res.items[i].name);
+             var d = Date.parse(res.items[i].name.replace(".htm", ""));
+             if (!isNaN(d)) {
+               var path = "https://psymm.github.io/HWBC-Results/" + res.items[i].path;
+               var li = `<li><a href="${path}" target="results">${new Date(d).toDateString()}</a></li>`;
+               sessions.insertAdjacentHTML("beforeend", li);
+             }
+           }
+         }};
+
+      xhr.send();
+    </script>
+  </body>
+</html>
