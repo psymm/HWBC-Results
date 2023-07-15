@@ -12,6 +12,9 @@
   <body>
     <div>
       <ul id="sessions">
+        {% for page in site.pages %}
+          <li><a href="{{ page.url | sort: 'date' | reverse | limit: 50 }}" target="results">{{ page.dir }} {{ page.name }}</li>
+        {% endfor %}
       </ul>
     </div>
     <script>
