@@ -15,7 +15,7 @@
     <div>
       <ul id="sessions">
         {% assign allFiles = site.static_files | where_exp: "file", "file.path contains 'Monday' " | where_exp: "file", "file.basename contains '20' " %}
-        {% capture fileDates %}{% for file in allFiles %}{{ file.basename | date: %Y%m%d }},{{ file.path }}|{% endfor %}{% endcapture %}
+        {% capture fileDates %}{% for file in allFiles %}{{ file.basename | date: "%Y%m%d" }},{{ file.path }}|{% endfor %}{% endcapture %}
         {% assign sortedFiles = fileDates | split "|" | sort | reverse %}
         {% for file in sortedFiles limit: 50 %}
           {% assign details = file | split "," %}
