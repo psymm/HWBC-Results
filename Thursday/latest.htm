@@ -1,0 +1,13 @@
+---
+---
+<html>
+  <head>
+    <script>
+      {% assign allFiles = site.static_files | where_exp: "file", "file.path contains 'Thursday' " | where_exp: "file", "file.basename contains '20' " %}
+      {% capture fileDates %}{% for file in allFiles %}{{ file.basename | date: "%Y%m%d" }},{{ file.path }},{{ file.basename }};{% endfor %}{% endcapture %}
+      {% assign sortedFiles = fileDates | split: ";" | sort | reverse %}
+      {% assign details = sortedFiles[0] | split: "," %}
+      document.location = "{{ details[1] | absolute_url }}";
+    </script>
+  </head>
+</html>
